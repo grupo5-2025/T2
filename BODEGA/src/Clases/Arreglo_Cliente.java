@@ -1,37 +1,43 @@
 package Clases;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Arreglo_Cliente  {  
-	private ArrayList<Cliente> clientes;
+	Connection cn=mysql.conexion.getConnection();
 
-    public Arreglo_Cliente() {
-        clientes = new ArrayList<Cliente>();
-        List<Boleta> boletasVacia = new ArrayList<>();
-        
-        clientes.add(new Cliente(1, 12345678, "Juan Pérez", boletasVacia));
-        clientes.add(new Cliente(2, 87654321, "María Torres", boletasVacia));
-    }
-
-    public void adicionar(Cliente c) {
-        clientes.add(c);
-    }
-
-    public Cliente obtener(int pos) {
-        return clientes.get(pos);
-    }
-
-    public Cliente buscarPorDni(int dni) {
-        for (Cliente c : clientes) {
-            if (c.getDni() == dni) {
-                return c;
-            }
+    public void registrar_Cliente(Cliente c) {
+        try {
+            CallableStatement cs = cn.prepareCall("{call sp_regis_cliente(?, ?, ?)}");
+            cs.setString(1, c.getIdCliente());
+            cs.setInt(2, c.getDni());
+            cs.setString(3, c.getNombre());
+            cs.executeUpdate();
+            cs.close();
+        } catch (Exception e) {
+            System.out.println("Error al registrar cliente: " + e);
         }
-        return null;
     }
 
-    public int tamaño() {
-        return clientes.size();
+    public static ArrayList<Cliente> listar_cliente() {
+        ArrayList<Cliente> lista = new ArrayList<>();
+        try {
+            CallableStatement cs = cn.prepareCall("{call sp_listarclientes()}");
+            ResultSet rs = cs.executeQuery();
+            while (rs.next()) {
+                String id = rs.getString("idcliente");
+                int dni = rs.getInt("dni");
+                String nombre = rs.getString("nombre");
+                lista.add(new Cliente(id, dni, nombre));
+            }
+            rs.close();
+            cs.close();
+        } catch (Exception e) {
+            System.out.println("Error al listar clientes: " + e);
+        }
+        return lista;
     }
 }

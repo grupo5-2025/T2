@@ -4,27 +4,19 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class Ingreso_Stock {
-	private int idregistro,cantidadBultos;
-	private LocalDateTime fechaRegistro;
-	private List<Detalle_Ingreso>detallesIngreso;
-	public Ingreso_Stock(int idregistro, int cantidadBultos, LocalDateTime fechaRegistro,
-			List<Detalle_Ingreso> detallesIngreso) {
-		this.idregistro = idregistro;
-		this.cantidadBultos = cantidadBultos;
+	private String idRegistro;
+    private LocalDateTime fechaRegistro;
+    private int cantidadBultos;
+	public Ingreso_Stock(String idRegistro, LocalDateTime fechaRegistro, int cantidadBultos) {
+		this.idRegistro = idRegistro;
 		this.fechaRegistro = fechaRegistro;
-		this.detallesIngreso = detallesIngreso;
-	}
-	public int getIdregistro() {
-		return idregistro;
-	}
-	public void setIdregistro(int idregistro) {
-		this.idregistro = idregistro;
-	}
-	public int getCantidadBultos() {
-		return cantidadBultos;
-	}
-	public void setCantidadBultos(int cantidadBultos) {
 		this.cantidadBultos = cantidadBultos;
+	}
+	public String getIdRegistro() {
+		return idRegistro;
+	}
+	public void setIdRegistro(String idRegistro) {
+		this.idRegistro = idRegistro;
 	}
 	public LocalDateTime getFechaRegistro() {
 		return fechaRegistro;
@@ -32,11 +24,11 @@ public class Ingreso_Stock {
 	public void setFechaRegistro(LocalDateTime fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
-	public List<Detalle_Ingreso> getDetallesIngreso() {
-		return detallesIngreso;
+	public int getCantidadBultos() {
+		return cantidadBultos;
 	}
-	public void setDetallesIngreso(List<Detalle_Ingreso> detallesIngreso) {
-		this.detallesIngreso = detallesIngreso;
+	public void setCantidadBultos(int cantidadBultos) {
+		this.cantidadBultos = cantidadBultos;
 	}
 
 }

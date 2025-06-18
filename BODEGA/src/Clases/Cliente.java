@@ -3,19 +3,18 @@ package Clases;
 import java.util.List;
 
 public class Cliente {
-	private int idCliente, dni;
-	private String nombre;
-	private List<Boleta>boletas;
-	public Cliente(int idCliente, int dni, String nombre, List<Boleta> boletas) {
+	private String idCliente;
+    private int dni;
+    private String nombre;
+	public Cliente(String idCliente, int dni, String nombre) {
 		this.idCliente = idCliente;
 		this.dni = dni;
 		this.nombre = nombre;
-		this.boletas = boletas;
 	}
-	public int getIdCliente() {
+	public String getIdCliente() {
 		return idCliente;
 	}
-	public void setIdCliente(int idCliente) {
+	public void setIdCliente(String idCliente) {
 		this.idCliente = idCliente;
 	}
 	public int getDni() {
@@ -30,11 +29,5 @@ public class Cliente {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public List<Boleta> getBoletas() {
-		return boletas;
-	}
-	public void setBoletas(List<Boleta> boletas) {
-		this.boletas = boletas;
-	}
-
+    
 }

@@ -1,41 +1,68 @@
 package Clases;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import Clases.Arreglo_Proveedor;
 import Clases.Producto;
 import Clases.Proveedor;
 public class Arreglo_Producto {
-	private ArrayList<Producto> product;
-    private ArrayList<Proveedor> provee;
-public Arreglo_Producto() {
-	product = new ArrayList<>();
-    provee = new ArrayList<>();
-    Proveedor prov1 = new Proveedor(10, 123456, "Vittorio");
-    provee.add(prov1);
-    Producto prod1 = new Producto(1020, 10, "Fideos", 10, prov1);
-    product.add(prod1);
-    prov1.agregarProducto(prod1);
+ public Connection cn=mysql.conexion.getConnection();
+public void registrar_producto(Producto p) {
+    try {
+        CallableStatement cs = cn.prepareCall("{call sp_regist_producto(?, ?, ?, ?)}");
+        cs.setString(1, p.getIdProducto());
+        cs.setString(2, p.getNombreProducto());
+        cs.setFloat(3, p.getPrecio());
+        cs.setInt(4, p.getStock());
+        cs.executeUpdate();
+        cs.close();
+    } catch (Exception e) {
+        System.out.println("Error al registrar producto: " + e);
+    }
 }
-public void adicionar(Producto c) {
-product.add(c);
+
+public ArrayList<Producto> listar_producto() {
+    ArrayList<Producto> lista = new ArrayList<>();
+    try {
+        CallableStatement cs = cn.prepareCall("{call sp_Listar_productos()}");
+        ResultSet rs = cs.executeQuery();
+        while (rs.next()) {
+            String id = rs.getString("idproducto");
+            String nombre = rs.getString("nombreproducto");
+            float precio = rs.getFloat("precio");
+            int stock = rs.getInt("stock");
+            lista.add(new Producto(id, nombre, precio, stock));
+        }
+        rs.close();
+        cs.close();
+    } catch (Exception e) {
+        System.out.println("Error al listar productos: " + e);
+    }
+    return lista;
 }
-public Producto obtener(int c) {
-	return product.get(c);
+
+public Producto buscarProductoPorId(String idProducto) {
+    Producto prod = null;
+    try {
+        CallableStatement cs = cn.prepareCall("{call sp_buscar_producto(?)}");
+        cs.setString(1, idProducto);
+        ResultSet rs = cs.executeQuery();
+        if (rs.next()) {
+            String id = rs.getString("idproducto");
+            String nombre = rs.getString("nombreproducto");
+            float precio = rs.getFloat("precio");
+            int stock = rs.getInt("stock");  // <--- aquí está el cambio
+            prod = new Producto(id, nombre, precio, stock);  // <--- constructor con 4 parámetros
+        }
+        rs.close();
+        cs.close();
+    } catch (Exception e) {
+        System.out.println("Error al buscar producto: " + e);
+    }
+    return prod;
 }
-public Producto buscar(int code) {
-	for (int i=0;i<product.size();i++) {
-		if(obtener(i).getIdproducto()==code) return obtener(i);
-	}
-	return null;
-}
-public int tamaño() {
-	return product.size();
-}
-public void adicionar(Proveedor c) {
-provee.add(c);
-}
-public Proveedor get(int s) {
-	return provee.get(s);
-}
+
 }

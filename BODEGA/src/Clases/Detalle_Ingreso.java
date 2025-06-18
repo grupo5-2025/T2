@@ -1,13 +1,33 @@
 package Clases;
 
 public class Detalle_Ingreso {
-	private int cantidadProducto;
-	private Producto producto;
-	private Ingreso_Stock ingresoStock;
-	public Detalle_Ingreso(int cantidadProducto, Producto producto, Ingreso_Stock ingresoStock) {
+	private String idDetalleIngreso;
+    private String idRegistro;
+    private String idProducto;
+    private int cantidadProducto;
+	public Detalle_Ingreso(String idDetalleIngreso, String idRegistro, String idProducto, int cantidadProducto) {
+		this.idDetalleIngreso = idDetalleIngreso;
+		this.idRegistro = idRegistro;
+		this.idProducto = idProducto;
 		this.cantidadProducto = cantidadProducto;
-		this.producto = producto;
-		this.ingresoStock = ingresoStock;
+	}
+	public String getIdDetalleIngreso() {
+		return idDetalleIngreso;
+	}
+	public void setIdDetalleIngreso(String idDetalleIngreso) {
+		this.idDetalleIngreso = idDetalleIngreso;
+	}
+	public String getIdRegistro() {
+		return idRegistro;
+	}
+	public void setIdRegistro(String idRegistro) {
+		this.idRegistro = idRegistro;
+	}
+	public String getIdProducto() {
+		return idProducto;
+	}
+	public void setIdProducto(String idProducto) {
+		this.idProducto = idProducto;
 	}
 	public int getCantidadProducto() {
 		return cantidadProducto;
@@ -15,17 +35,5 @@ public class Detalle_Ingreso {
 	public void setCantidadProducto(int cantidadProducto) {
 		this.cantidadProducto = cantidadProducto;
 	}
-	public Producto getProducto() {
-		return producto;
-	}
-	public void setProducto(Producto producto) {
-		this.producto = producto;
-	}
-	public Ingreso_Stock getIngresoStock() {
-		return ingresoStock;
-	}
-	public void setIngresoStock(Ingreso_Stock ingresoStock) {
-		this.ingresoStock = ingresoStock;
-	}
-
+	
 }

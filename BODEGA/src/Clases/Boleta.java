@@ -1,27 +1,27 @@
 package Clases;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Boleta {
-	private int idboleta;
-	private LocalDateTime fechaEmision;
-	private double total; 
-	private Cliente cliente;
-	private List<Detalle_Boleta>detalle;
-	public Boleta(int idboleta, LocalDateTime fechaEmision, double total, Cliente cliente,
-			List<Detalle_Boleta> detalle) {
-		this.idboleta = idboleta;
+	private String idBoleta;
+    private LocalDateTime fechaEmision;
+    private float total;
+    private String idCliente;
+    private ArrayList<Detalle_Boleta> detalle = new ArrayList();
+
+	public Boleta(String idBoleta, LocalDateTime fechaEmision, float total, String idCliente) {
+		this.idBoleta = idBoleta;
 		this.fechaEmision = fechaEmision;
 		this.total = total;
-		this.cliente = cliente;
-		this.detalle = detalle;
+		this.idCliente = idCliente;
 	}
-	public int getIdboleta() {
-		return idboleta;
+	public String getIdBoleta() {
+		return idBoleta;
 	}
-	public void setIdboleta(int idboleta) {
-		this.idboleta = idboleta;
+	public void setIdBoleta(String idBoleta) {
+		this.idBoleta = idBoleta;
 	}
 	public LocalDateTime getFechaEmision() {
 		return fechaEmision;
@@ -29,23 +29,23 @@ public class Boleta {
 	public void setFechaEmision(LocalDateTime fechaEmision) {
 		this.fechaEmision = fechaEmision;
 	}
-	public double getTotal() {
+	public float getTotal() {
 		return total;
 	}
-	public void setTotal(double total) {
+	public void setTotal(float total) {
 		this.total = total;
 	}
-	public Cliente getCliente() {
-		return cliente;
+	public String getIdCliente() {
+		return idCliente;
 	}
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setIdCliente(String idCliente) {
+		this.idCliente = idCliente;
 	}
-	public List<Detalle_Boleta> getDetalle() {
-		return detalle;
-	}
-	public void setDetalle(List<Detalle_Boleta> detalle) {
-		this.detalle = detalle;
+	public ArrayList<Detalle_Boleta> getDetalle() {
+	    return detalle;
 	}
 
+	public void setDetalle(ArrayList<Detalle_Boleta> detalle) {
+	    this.detalle = detalle;
+	}
 }

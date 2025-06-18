@@ -1,39 +1,52 @@
 package Clases;
 
 public class Detalle_Boleta {
-	private int cantidadCompradas;
-	private double subtotal;
-	private Producto producto;
-	private Boleta boleta;
-	public Detalle_Boleta(int cantidadCompradas, double subtotal, Producto producto, Boleta boleta) {
-		this.cantidadCompradas = cantidadCompradas;
-		this.subtotal = subtotal; 
-		this.producto = producto;
-		this.boleta = boleta;
+	private String idDetalleBoleta;
+    private String idBoleta;
+    private String idProducto;
+    private int cantidadComprada;
+    private float subtotal;
+	public Detalle_Boleta(String idDetalleBoleta, String idBoleta, String idProducto, int cantidadComprada,
+			float subtotal) {
+		this.idDetalleBoleta = idDetalleBoleta;
+		this.idBoleta = idBoleta;
+		this.idProducto = idProducto;
+		this.cantidadComprada = cantidadComprada;
+		this.subtotal = subtotal;
 	}
-	public int getCantidadCompradas() {
-		return cantidadCompradas;
+	public String getIdDetalleBoleta() {
+		return idDetalleBoleta;
 	}
-	public void setCantidadCompradas(int cantidadCompradas) {
-		this.cantidadCompradas = cantidadCompradas;
+	public void setIdDetalleBoleta(String idDetalleBoleta) {
+		this.idDetalleBoleta = idDetalleBoleta;
 	}
-	public double getSubtotal() {
+	public String getIdBoleta() {
+		return idBoleta;
+	}
+	public void setIdBoleta(String idBoleta) {
+		this.idBoleta = idBoleta;
+	}
+	public String getIdProducto() {
+		return idProducto;
+	}
+	public void setIdProducto(String idProducto) {
+		this.idProducto = idProducto;
+	}
+	public int getCantidadComprada() {
+		return cantidadComprada;
+	}
+	public void setCantidadComprada(int cantidadComprada) {
+		this.cantidadComprada = cantidadComprada;
+	}
+	public float getSubtotal() {
 		return subtotal;
 	}
-	public void setSubtotal(double subtotal) {
+	public void setSubtotal(float subtotal) {
 		this.subtotal = subtotal;
 	}
 	public Producto getProducto() {
-		return producto;
+	    Arreglo_Producto ap = new Arreglo_Producto();
+	    return ap.buscarProductoPorId(idProducto);
 	}
-	public void setProducto(Producto producto) {
-		this.producto = producto;
-	}
-	public Boleta getBoleta() {
-		return boleta;
-	}
-	public void setBoleta(Boleta boleta) {
-		this.boleta = boleta;
-	}
-
+    
 }

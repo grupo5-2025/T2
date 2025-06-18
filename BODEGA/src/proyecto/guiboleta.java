@@ -73,12 +73,22 @@ public class guiboleta extends JDialog {
 			contentPanel.add(lblNewLabel_2); 
 		}
 		{
-			Cliente cliente=boleta.getCliente();
-			txtdni = new JTextField(String.valueOf(cliente.getDni()));
-			txtdni.setEditable(false);
-			txtdni.setBounds(36, 125, 86, 20);
-			contentPanel.add(txtdni);
-			txtdni.setColumns(10);
+			;
+			String idCliente = boleta.getIdCliente();
+			Cliente cliente = null;
+			for (Cliente c : Arreglo_Cliente.listar_cliente()) {
+				if (c.getIdCliente().equals(idCliente)) {
+					cliente = c;
+					break;
+				}
+			}
+			if (cliente != null) {
+				txtdni = new JTextField();
+				txtdni.setEditable(false);
+				txtdni.setBounds(36, 125, 86, 20);
+				contentPanel.add(txtdni);
+				txtdni.setColumns(10);
+
 		}
 		txtS = new JTextArea();
 		txtS.setEditable(false);
@@ -87,9 +97,9 @@ public class guiboleta extends JDialog {
 		contentPanel.add(scrollPane);
 		StringBuilder sb = new StringBuilder();
 		for (Detalle_Boleta det : boleta.getDetalle()) {
-		    Producto p = det.getProducto();
+		    Producto p = det.getProducto(); // CORRECTO: accedes al producto del detalle
 		    sb.append("Producto: ").append(p.getNombreProducto()).append("\n");
-		    sb.append("Cantidad: ").append(det.getCantidadCompradas()).append("\n");
+		    sb.append("Cantidad: ").append(det.getCantidadComprada()).append("\n");
 		    sb.append("Precio Unitario: ").append(p.getPrecio()).append("\n");
 		    sb.append("Subtotal: ").append(det.getSubtotal()).append("\n\n");
 		}
@@ -125,7 +135,7 @@ public class guiboleta extends JDialog {
 				lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 			}
 			{
-				txtid = new JTextField(String.valueOf(boleta.getIdboleta()));
+				txtid = new JTextField(String.valueOf(boleta.getIdBoleta()));
 				panel.add(txtid);
 				Random random = new Random();
 		        int numeroAleatorio = random.nextInt(900) + 100;
@@ -135,5 +145,6 @@ public class guiboleta extends JDialog {
 			}
 		}
 	}
+}
 }
 
